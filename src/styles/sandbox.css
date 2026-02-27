@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1e3a2e;
+    border-radius: 3px;
+}
+
+/* ── Keyframes ── */
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse-dot {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+@keyframes bounce-fab {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-10px);
+    }
+
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes ripple-ring {
+    0% {
+        transform: scale(0.85);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(32px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ── Skeleton shimmer ── */
+@keyframes shimmer {
+    0% {
+        background-position: -600px 0;
+    }
+
+    100% {
+        background-position: 600px 0;
+    }
+}
+
+.skeleton {
+    background: linear-gradient(90deg,
+            #0f1e14 25%,
+            #1a2e22 50%,
+            #0f1e14 75%);
+    background-size: 600px 100%;
+    animation: shimmer 1.6s infinite linear;
+    border-radius: 8px;
+}
+
+/* Bubble-shaped skeleton variants */
+.skeleton-bubble-out {
+    border-radius: 18px 18px 4px 18px;
+}
+
+.skeleton-bubble-in {
+    border-radius: 18px 18px 18px 4px;
+}
+
+/* ── Animation utility classes ── */
+.animate-fade-slide {
+    animation: fadeSlide 0.25s ease;
+}
+
+.animate-pulse-dot {
+    animation: pulse-dot 1.5s infinite;
+}
+
+.animate-bounce-fab {
+    animation: bounce-fab 2.2s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+}
+
+.animate-ripple {
+    animation: ripple-ring 2.2s ease-out infinite;
+}
+
+.animate-ripple-2 {
+    animation: ripple-ring 2.2s ease-out infinite 0.7s;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.2s ease;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.25s ease;
+}
+
+/* ── Gradient backgrounds ── */
+.bg-wa-gradient {
+    background: linear-gradient(145deg, #075e54, #25d366);
+}
+
+.bg-bubble-out {
+    background: linear-gradient(135deg, #075e54, #128c7e);
+}
+
+.bg-bubble-failed {
+    background: #2a1010;
+}
+
+.bg-bubble-in {
+    background: #1e2a24;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, #25d366, #075e54);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ── Bubble border-radius ── */
+.bubble-radius-out {
+    border-radius: 18px 18px 4px 18px;
+}
+
+.bubble-radius-in {
+    border-radius: 18px 18px 18px 4px;
+}
+
+/* ── Quick action buttons ── */
+.quick-btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 6px;
+    padding: 8px 12px;
+    background: #0f1e14;
+    border: 1px solid #1e3a2e;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: 'DM Mono', monospace;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.15s;
+}
+
+/* ── Sidebar slide (mobile drawer) ── */
+.sidebar-panel {
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-panel.open {
+    transform: translateX(0);
+}
+
+.sidebar-panel.closed {
+    transform: translateX(100%);
+}
+
+/* ── Modal ── */
+.modal-backdrop {
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-box {
+    animation: slideUp 0.25s ease;
+}

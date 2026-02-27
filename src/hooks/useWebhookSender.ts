@@ -19,6 +19,37 @@ export function useWebhookSender({
     addLog,
 }: UseSenderOptions) {
 
+    const sendMessage = useCallback(
+        async (id: string, text: string) => {
+            updateStatus(id, "sending");
+            try {
+                const res = await fetch(`${WEBHOOK_SERVER}/api/message/send`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        to: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER,
+                        text,
+                        useTemplate: false,
+                    }),
+                });
+                updateStatus(id, res.ok ? "sent" : "failed");
+                addLog(res.ok ? `✓ Sent: "${text}"` : `✗ Failed (${res.status}): "${text}"`);
+            } catch (err) {
+                updateStatus(id, "failed");
+                addLog(`✗ Network error: "${text}"`);
+            }
+        },
+        [updateStatus, addLog]
+    );
+
+    const retryMessage = useCallback(
+        (msg: Message) => {
+            addLog(`↺ Retrying: "${msg.body}"`);
+            sendMessage(msg.id, msg.body);
+        },
+        [sendMessage, addLog]
+    );
+
     const simulateReply = useCallback(
         (text: string) => {
             addMessage({
@@ -34,5 +65,5 @@ export function useWebhookSender({
         [addMessage, addLog]
     );
 
-    return { simulateReply };
+    return { sendMessage, retryMessage, simulateReply };
 }

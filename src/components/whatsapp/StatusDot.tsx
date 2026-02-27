@@ -1,4 +1,4 @@
-import { MessageStatus } from "../types";
+import { MessageStatus } from "../../types";
 
 const STATUS_COLORS: Record<MessageStatus, string> = {
     received: "#4ade80",

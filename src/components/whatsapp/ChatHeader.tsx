@@ -1,4 +1,4 @@
-import { ServerStatus } from "../types";
+import { ServerStatus } from "../../types";
 
 const STATUS_COLORS: Record<ServerStatus["state"], string> = {
     checking: "#facc15",

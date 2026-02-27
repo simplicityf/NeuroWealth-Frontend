@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Message } from "../types";
+import { Message } from "../../types";
 import { MessageBubble } from "./MessageBubble";
 
 interface MessageListProps {
     messages: Message[];
+    onRetry: (msg: Message) => void;
 }
 
-export function MessageList({ messages }: MessageListProps) {
+export function MessageList({ messages, onRetry }: MessageListProps) {
     const bottomRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -33,7 +34,9 @@ export function MessageList({ messages }: MessageListProps) {
                     WhatsApp message hitting your webhook server.
                 </div>
             ) : (
-                messages.map((msg) => <MessageBubble key={msg.id} msg={msg} />)
+                messages.map((msg) => (
+                    <MessageBubble key={msg.id} msg={msg} onRetry={onRetry} />
+                ))
             )}
             <div ref={bottomRef} />
         </div>

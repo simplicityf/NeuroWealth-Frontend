@@ -1,0 +1,58 @@
+const QUICK_MESSAGES = [
+    "check balance",
+    "deposit 100 XLM",
+    "withdraw 50 XLM",
+    "help",
+];
+
+const BOT_REPLIES = [
+    "Your balance: 250 XLM",
+    "✅ Deposit confirmed!",
+    "❌ Insufficient funds",
+];
+
+interface QuickActionsProps {
+    onQuickMessage: (text: string) => void;
+    onBotReply: (text: string) => void;
+}
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+    return (
+        <p className="text-[11px] font-semibold text-[#3d6b52] tracking-widest uppercase mb-2.5">
+            {children}
+        </p>
+    );
+}
+
+function QuickButton({ label, color, onClick }: { label: string; color: string; onClick: () => void }) {
+    return (
+        <button
+            onClick={onClick}
+            className="quick-btn"
+            style={{ color }}
+            onMouseEnter={(e) => (e.currentTarget.style.borderColor = color)}
+            onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#1e3a2e")}
+        >
+            {label}
+        </button>
+    );
+}
+
+export function QuickActions({ onQuickMessage, onBotReply }: QuickActionsProps) {
+    return (
+        <>
+            <div className="p-4 border-b border-[#1a2e22]">
+                <SectionLabel>Quick Test Messages</SectionLabel>
+                {QUICK_MESSAGES.map((cmd) => (
+                    <QuickButton key={cmd} label={cmd} color="#86b09a" onClick={() => onQuickMessage(cmd)} />
+                ))}
+            </div>
+            <div className="p-4 border-b border-[#1a2e22]">
+                <SectionLabel>Simulate Bot Reply</SectionLabel>
+                {BOT_REPLIES.map((reply) => (
+                    <QuickButton key={reply} label={reply} color="#4ade80" onClick={() => onBotReply(reply)} />
+                ))}
+            </div>
+        </>
+    );
+}

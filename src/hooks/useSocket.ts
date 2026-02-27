@@ -12,6 +12,14 @@ export function useSocket(addMessage: (msg: Message) => void) {
 
         socket.on("connect", () => console.log("✅ Socket.IO connected"));
 
+        socket.on("disconnect", (reason) => {
+            console.warn("⚠️ Socket.IO disconnected:", reason);
+        });
+
+        socket.on("connect_error", (err) => {
+            console.error("❌ Socket.IO connect error:", err.message);
+        });
+
         socket.on("message", (raw: any) => {
             console.log("📨 Received from server:", raw);
 
@@ -25,6 +33,10 @@ export function useSocket(addMessage: (msg: Message) => void) {
             };
 
             addMessage(msg);
+        });
+
+        socket.onAny((event, ...args) => {
+            console.log("🔌 Socket event:", event, args);
         });
 
         return () => { socket.disconnect(); };
