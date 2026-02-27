@@ -80,13 +80,6 @@ export default function WebhookTestPage() {
                     />
                 )}
 
-                {/* ── Sidebar ──
-                    Desktop: static flex column, always visible (no transform at all).
-                    Mobile:  fixed drawer controlled via inline style transform.
-                    Root cause of the bug: mixing CSS class .closed (translateX 100%)
-                    with Tailwind md:translate-x-0 — CSS specificity meant .closed
-                    always won. Solution: apply slide transform via JS/inline only on mobile.
-                ── */}
                 <aside
                     className="flex flex-col bg-[#080e0a] border-l border-[#1a2e22] overflow-hidden w-80 flex-shrink-0"
                     style={isMobile ? {
@@ -106,13 +99,6 @@ export default function WebhookTestPage() {
                             onBotReply={handleBotReply}
                         />
                         <RequestLog log={log} onClear={clearLog} />
-                    </div>
-
-                    <div className="flex-shrink-0 m-3 p-3 bg-[#0f1e14] rounded-lg border border-[#1e3a2e]
-                                    text-[11px] text-[#3d6b52] leading-relaxed">
-                        <strong className="text-[#4a7a5a]">Tip:</strong>{" "}
-                        Set <code className="text-[#86b09a]">WHATSAPP_APP_SECRET=</code> (empty) in your{" "}
-                        <code className="text-[#86b09a]">.env</code> to skip signature checks during local testing.
                     </div>
                 </aside>
 
